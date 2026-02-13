@@ -976,36 +976,12 @@ html {
             <div class="contact-grid">
                 <div class="contact-form-container">
                     <h3>Inquire About Courses</h3>
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="course_interest">Course Interested In</label>
-                            <select id="course_interest" name="course_interest" required>
-                                <option value="">-- Select Course --</option>
-                                <option value="JEE">JEE (Mains & Advanced)</option>
-                                <option value="NEET">NEET-UG</option>
-                                <option value="Boards">Class XI & XII (Boards)</option>
-                                <option value="Other">Other Inquiry</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message (Optional)</label>
-                            <textarea id="message" name="message" rows="4"></textarea>
-                        </div>
-                        <button type="submit" class="btn">Send Inquiry</button>
-                        <div id="form-message" class="form-notification"></div>
-                    </form>
+                     <form action="https://formspree.io/f/xblonyrp" method="POST" onsubmit="return showSuccess()">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Write Full Details Here." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
                 </div>
                 
                 <div class="contact-info">
