@@ -1,112 +1,115 @@
-// Complete Razorpay Payment Integration
-function initializePayment() {
-    var options = {
-        "key": "YOUR_RAZORPAY_KEY",
-        // Order ID generated from the backend
-        "order_id": "YOUR_ORDER_ID",
-        "handler": function(response) {
-            alert('Payment Successful!');
-        },
-        "prefill": {
-            "name": "Customer Name",
-            "email": "customer@example.com",
-            "contact": "9999999999"
-        },
-        // Additional options can be configured here
-    };
-    var rzp = new Razorpay(options);
-    rzp.open();
-}
+// script.js
+
+// Dark Mode Toggle
+const toggleDarkMode = () => {
+    document.body.classList.toggle('dark-mode');
+};
+
+// Smooth Scrolling
+const smoothScroll = (target) => {
+    document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+};
 
 // Animated Counters
-function animateCounters() {
+const animateCounters = () => {
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
-        counter.innerText = '0';
-        const updateCounter = () => {
+        const updateCount = () => {
             const target = +counter.getAttribute('data-target');
-            const c = +counter.innerText;
+            const count = +counter.innerText;
             const increment = target / 200;
-            if (c < target) {
-                counter.innerText = Math.ceil(c + increment);
-                setTimeout(updateCounter, 1);
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment);
+                setTimeout(updateCount, 1);
             } else {
                 counter.innerText = target;
             }
         };
-        updateCounter();
+        updateCount();
     });
-}
+};
 
 // Form Validation
-function validateForm() {
-    const form = document.getElementById('myForm');
-    form.addEventListener('submit', function(event) {
+const validateForm = (form) => {
+    form.addEventListener('submit', (e) => {
+        const inputs = form.querySelectorAll('input');
         let valid = true;
-        const inputs = form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
             if (!input.value) {
                 valid = false;
                 input.classList.add('error');
+            } else {
+                input.classList.remove('error');
             }
         });
-        if (!valid) {
-            event.preventDefault();
-            alert('Please fill in all required fields.');
+        if (!valid) e.preventDefault();
+    });
+};
+
+// WhatsApp Integration
+const sendWhatsAppMessage = (message) => {
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encodedMessage}`);
+};
+
+// Lead Capture Popup
+const leadCapturePopup = () => {
+    const popup = document.getElementById('lead-popup');
+    popup.style.display = 'block';
+};
+
+// Sticky Buttons
+const stickyButtons = () => {
+    const button = document.getElementById('sticky-button');
+    window.onscroll = () => {
+        if (window.scrollY > 100) {
+            button.style.display = 'block';
+        } else {
+            button.style.display = 'none';
         }
-    });
-}
+    };
+};
 
-// WhatsApp and Call CTAs
-function addCTAs() {
-    const whatsappCTA = document.createElement('a');
-    whatsappCTA.href = 'https://api.whatsapp.com/send?phone=YOUR_PHONE_NUMBER';
-    whatsappCTA.innerText = 'Chat on WhatsApp';
-    document.body.appendChild(whatsappCTA);
-
-    const callCTA = document.createElement('a');
-    callCTA.href = 'tel:+YOUR_PHONE_NUMBER';
-    callCTA.innerText = 'Call Us';
-    document.body.appendChild(callCTA);
-}
-
-// Coupon System with GC10 for 10% Discount
-function applyCoupon() {
-    const couponInput = document.getElementById('couponCode');
-    const discount = couponInput.value === 'GC10' ? 0.10 : 0;
-    if (discount > 0) {
-        alert('Coupon applied! You get 10% off!');
-        // Apply discount logic here
-    } else {
-        alert('Invalid coupon code!');
-    }
-}
-
-// Smooth Scrolling
-function smoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            target.scrollIntoView({ behavior: 'smooth' });
+// Scroll Animations
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    const options = {
+        threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
         });
+    }, options);
+    elements.forEach(element => {
+        observer.observe(element);
     });
-}
+};
 
-// Mobile Optimization
-function optimizeForMobile() {
-    if (window.innerWidth < 768) {
-        // Update styles or functionality for mobile
-    }
-}
+// Testimonial Carousel
+const testimonialCarousel = () => {
+    const testimonials = document.querySelectorAll('.testimonial');
+    let index = 0;
+    setInterval(() => {
+        testimonials[index].classList.remove('active');
+        index = (index + 1) % testimonials.length;
+        testimonials[index].classList.add('active');
+    }, 5000);
+};
 
-// Initialize functions on document load
+// Conversion Tracking
+const trackConversion = (id) => {
+    // Tracking code logic here
+    console.log(`Tracking conversion for: ${id}`);
+};
+
+// Initialize Features
 document.addEventListener('DOMContentLoaded', () => {
-    initializePayment();
     animateCounters();
-    validateForm();
-    addCTAs();
-    smoothScroll();
-    optimizeForMobile();
+    stickyButtons();
+    testimonialCarousel();
+    animateOnScroll();
 });
