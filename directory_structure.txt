@@ -1,0 +1,9 @@
+lib/
+  main.dart
+  screens/
+  widgets/
+  models/
+  services/
+assets/
+  images/
+  fonts/
